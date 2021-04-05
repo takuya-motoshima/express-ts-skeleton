@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 router.get('/', (req, res, next) => {
     try {
-        res.render('login');
+        res.render('dashboard');
     }
     catch (e) {
         next(e);
