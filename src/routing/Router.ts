@@ -7,6 +7,7 @@ import path from 'path';
  * Router option type.
  */
 interface RouterOptions {
+  routesPath?: string,
   defaultController: string|undefined
 }
 
@@ -23,13 +24,12 @@ export default class {
   static mount(app: express.Express, options: RouterOptions) {
     // Initialize options.
     options = Object.assign({
+      routesPath: path.join(process.cwd(), 'routes'),
       defaultController: undefined
     }, options);
 
     // Set the URL to route based on the path of the file in the routes directory.
-    const routesPath = path.join(global.DIST_PATH, 'routes');
-    // const routesPath = path.join(process.cwd(), 'routes');
-    for (let filepath of File.find(`${routesPath}/**/*.js`)) {
+    for (let filepath of File.find(`${options.routesPath}/**/*.js`)) {
       const {default: router} = require(filepath);
       const matches = filepath.match(/\/routes(?:(\/..*))?\/(..*)\.js/);
       if (!matches) continue;

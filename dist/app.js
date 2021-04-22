@@ -14,10 +14,11 @@ const LocalVariables_1 = __importDefault(require("~/middlewares/LocalVariables")
 const UserAuthentication_1 = __importDefault(require("~/authentication/UserAuthentication"));
 const Router_1 = __importDefault(require("~/routing/Router"));
 const UserModel_1 = __importDefault(require("~/models/UserModel"));
+const path_1 = __importDefault(require("path"));
 // Creates and configures an ExpressJS web server.
 const app = express_1.default();
 // Set global variables.
-GlobalVariables_1.default.mount({ distPath: __dirname });
+GlobalVariables_1.default.mount();
 // Set environment variables.
 EnvironmentVariables_1.default.mount({ envPath: config_1.default.envPath });
 // Enable Handlebars template engine.
@@ -34,5 +35,8 @@ LocalVariables_1.default.mount(app, { override: config_1.default.overrideBaseUrl
 if (config_1.default.userAuthentication && config_1.default.userAuthentication.enabled)
     UserAuthentication_1.default.mount(app, { ...config_1.default.userAuthentication, model: UserModel_1.default });
 // Set up URL routing.
-Router_1.default.mount(app, { defaultController: config_1.default.defaultController });
+Router_1.default.mount(app, {
+    routesPath: path_1.default.join(process.cwd(), 'dist/routes'),
+    defaultController: config_1.default.defaultController
+});
 exports.default = app;

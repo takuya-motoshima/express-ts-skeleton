@@ -19,12 +19,11 @@ class default_1 {
     static mount(app, options) {
         // Initialize options.
         options = Object.assign({
+            routesPath: path_1.default.join(process.cwd(), 'routes'),
             defaultController: undefined
         }, options);
         // Set the URL to route based on the path of the file in the routes directory.
-        const routesPath = path_1.default.join(global.DIST_PATH, 'routes');
-        // const routesPath = path.join(process.cwd(), 'routes');
-        for (let filepath of nodejs_shared_1.File.find(`${routesPath}/**/*.js`)) {
+        for (let filepath of nodejs_shared_1.File.find(`${options.routesPath}/**/*.js`)) {
             const { default: router } = require(filepath);
             const matches = filepath.match(/\/routes(?:(\/..*))?\/(..*)\.js/);
             if (!matches)

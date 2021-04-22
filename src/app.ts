@@ -9,12 +9,13 @@ import LocalVariables from '~/middlewares/LocalVariables';
 import UserAuthentication from '~/authentication/UserAuthentication';
 import Router from '~/routing/Router';
 import UserModel from '~/models/UserModel';
+import path from 'path';
 
 // Creates and configures an ExpressJS web server.
 const app = express();
 
 // Set global variables.
-GlobalVariables.mount({distPath: __dirname});
+GlobalVariables.mount();
 
 // Set environment variables.
 EnvironmentVariables.mount({envPath: config.envPath});
@@ -38,6 +39,9 @@ if (config.userAuthentication && config.userAuthentication.enabled)
   UserAuthentication.mount(app, {...config.userAuthentication, model: UserModel});
 
 // Set up URL routing.
-Router.mount(app, {defaultController: config.defaultController});
+Router.mount(app, {
+  routesPath: path.join(process.cwd(), 'dist/routes'),
+  defaultController: config.defaultController
+});
 
 export default app;

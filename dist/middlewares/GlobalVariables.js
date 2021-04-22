@@ -1,5 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// /**
+//  * Global variable option type.
+//  */
+// interface GlobalVariablesOptions {
+//   distPath: string
+// }
 /**
  * Set global variables.
  * It can be accessed like "global.xxx" in all router and model classes.
@@ -12,13 +18,14 @@ class default_1 {
     /**
      * Mount on application.
      */
-    static mount(options) {
+    static mount() {
+        // static mount(options: GlobalVariablesOptions) {
         // Application root path.
         global.APP_PATH = process.cwd();
         console.debug(`Set APP_PATH: ${global.APP_PATH}`);
-        // Module path.
-        global.DIST_PATH = options.distPath;
-        console.debug(`Set DIST_PATH: ${global.DIST_PATH}`);
+        // // Module path.
+        // global.DIST_PATH = options.distPath;
+        // console.debug(`Set DIST_PATH: ${global.DIST_PATH}`);
     }
 }
 exports.default = default_1;

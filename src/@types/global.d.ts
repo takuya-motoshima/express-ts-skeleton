@@ -9,10 +9,10 @@ declare module NodeJS  {
      */
     APP_PATH: string;
 
-    /**
-     * The path where the module to be executed is located.
-     * @type {string}
-     */
-    DIST_PATH: string;
+    // /**
+    //  * The path where the module to be executed is located.
+    //  * @type {string}
+    //  */
+    // DIST_PATH: string;
   }
 }
